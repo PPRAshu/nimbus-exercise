@@ -1,0 +1,45 @@
+Question No.2
+==============
+
+@Config is used to 
+A class with @Config annotation is used to perform an action on button click. In most cases, the action is to retrieve values via HTTP Rest calls from database (MongoDB), and display on the web page.
+
+For example:
+
+@Config(url="/p/samplechangelogcore_b/_new?fn=_initEntity&target=/status&json=\"Test_Status_B\"&target=/sampleCoreChangLogEntityNestedB/nestedStatus&json=\"Test_Nested_Status_B\"")
+private String action_createEntityB;
+
+In the example shown above, when the button is clicked, the control will be navigated to the specified url.
+"new" is the http call for create(POST).
+
+The possible Actions are: -
+--------------------------
+get for HTTP GET
+
+new for HTTP post
+
+update for HTTP update
+
+delete for HTTP delete
+
+search for searching
+
+nav for navigation
+-------------------------------------------------------
+
+@Configs is a collection of configuration calls. Multiple calls to the database can be made simultaneously using @Configs, 
+  where each call will be represented by @Config.
+  
+  For example:
+  -----------
+    @Button
+		@Configs({
+			@Config(url="/.d/.m/sampleCoreChangLogEntityNested/nestedStatus/_update?rawPayload=\"Test_Nested_Status\""),
+			@Config(url="/.d/_process?fn=_setByRule&&rule=stateless_changelog_entityA"),
+			@Config(url="/p/samplechangelogview_b/_new?fn=_initEntity&target=/.m/status&json=\"Test_Status_B\""),
+			
+		})
+		private String button;
+    
+    In the above example when the submit button is clicked, three http calls that are being made i.e. update, process, and new.
+
